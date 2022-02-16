@@ -15,7 +15,7 @@ App({
     let loginFlag = that.getLoginFlag()
     // storage 有登录标识
     if (loginFlag) {
-      // 检查session_key是过期
+      // 检查session_key是过期(这里loginFlag是skey（加密后的session_key）)
       wx.checkSession({
         success: (res) => {
           let userStorageInfo = wx.getStorageSync('userInfo')
@@ -60,6 +60,7 @@ App({
               withCredentials:true,
               success:(infoRes)=>{
                 console.log('用户信息'+JSON.stringify(infoRes))
+                // 向服务器发送登录请求
                 wx.request({
                   url: api.loginUrl,
                   data:{
@@ -71,7 +72,16 @@ App({
                   },
                   success:(res)=>{
                     console.log('登录请求成功'+JSON.stringify(res))
-              
+                    res = res.data
+                    // 登录成功后，把userInfo设置为app全局数据，在storage设置userInfo和loginFlag
+                    if(res.result == 0){
+                      that.globalData.userInfo = res.userInfo
+                      wx.setStorageSync('userInfo', JSON.stringify(res.userInfo))
+                      wx.setStorageSync('loginFlag', res.skey)
+                      // callback()
+                    }else{
+                      that.showInfo(res.errMsg)
+                    }
                   },
                   fail:(error)=>{
                       that.showInfo('登录请求失败')
