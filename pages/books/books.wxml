@@ -1,2 +1,21 @@
 <!--pages/books/books.wxml-->
-<text>pages/books/books.wxml</text>
+<!-- 搜索 -->
+<!-- 分类 -->
+<!-- 书swiper -->
+<swiper>
+    <!-- 一本书 -->
+    <swiper-item wx:for="{{bookList}}" wx:key="index" class="swiper-item">
+        <!-- 点击跳转到详情页，参数id -->
+       <view catchtap="goDetail" data-id="{{item.book_id}}">
+            <!-- 书籍图片 -->
+            <view>
+                <image src="{{item.cover_url}}" mode="aspectFit" class="image"></image> 
+            </view>
+            <!-- 书籍信息 -->
+            <view class="book-info">
+                <text class="book-name">{{item.book_name}}</text>
+                <text class="book-author">{{item.author}}</text>
+            </view>
+       </view>
+    </swiper-item>
+</swiper>

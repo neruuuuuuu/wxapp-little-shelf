@@ -1,2 +1,13 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+
+<!-- 登录和未登录的不同展示 -->
+<view>
+    <block wx:if="{{ loginFlag }}">
+        <image src="{{ userInfo.avatarUrl }}"></image>
+        <text>{{userInfo.nickName}}</text>
+    </block>
+    <block wx:else>
+        <image></image>
+        <test>点击登录</test>
+    </block>
+</view>

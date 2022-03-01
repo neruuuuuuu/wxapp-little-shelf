@@ -1,11 +1,16 @@
 // pages/my/my.js
+
+//获取全局数据 
+let app = getApp()
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        userInfo: {},
+        loginFlag:wx.getStorageSync('loginFlag')
     },
 
     /**
@@ -26,7 +31,10 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        let that = this
+        that.setData({
+            userInfo: JSON.parse(app.globalData.userInfo)
+        })
     },
 
     /**

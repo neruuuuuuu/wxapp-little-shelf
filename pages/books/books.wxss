@@ -1,1 +1,31 @@
 /* pages/books/books.wxss */
+swiper{
+    margin-top: 30rpx;
+    height: 800rpx;
+}
+swiper-item{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+image{
+    height: 640rpx;
+}
+
+.book-info{
+    width: 500rpx;
+    height:100rpx;
+    margin: 20rpx 40rpx;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-name{
+    font-size: larger;
+    align-self: center;
+}
+
+.book-author{
+    margin-top: 10rpx;
+    align-self: center;
+}

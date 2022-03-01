@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "小书架",
+  "disableScroll": true
+
 }

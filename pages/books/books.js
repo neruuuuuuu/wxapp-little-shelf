@@ -1,18 +1,60 @@
 // pages/books/books.js
+
+const api = require('../../config/cofig')
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        bookList: []
+    },
 
+    /**
+     *  调用接口，获取书籍列表 
+     */
+    getBookList:function(){
+        let that = this
+
+        wx.request({
+          url: api.getBooksUrl,
+          data:{
+              is_all:1
+         },
+        success:(res)=>{
+            let data = res.data
+            console.log(data)
+            if(data.result === 0){
+                that.setData({
+                    bookList:data.data
+                })
+            }
+        },
+        error:(err)=>{
+            console.log(err)
+        }
+        })
+    },
+
+    /**
+     * 打开书籍详情页面
+     */
+    goDetail:function(ev){
+        let dataset = ev.currentTarget.dataset
+        console.log(dataset)
+        let navigateUrl = '../detail/detail?id='+dataset.id
+        wx.navigateTo({
+          url: navigateUrl,
+        })
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let that = this
+        that.getBookList()
     },
 
     /**
